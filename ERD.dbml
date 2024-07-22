@@ -1,0 +1,46 @@
+Table Dog {
+    Id int [primary key]
+    Name varchar
+    CityId int [ref: > City.Id]
+    WalkerId int [ref: > Walker.Id]
+}
+
+Table Walker {
+    Id int [primary key]
+    Name varchar
+
+}
+
+Table City {
+    Id int [primary key]
+    Name varchar
+}
+
+Table WalkerCities {
+    Id int [primary key]
+    WalkerId int  [ref: > Walker.Id]
+    CityId int [ref: > City.Id]
+}
+
+//Read All
+    //Dogs
+    //Walkers
+    //Cities
+
+//Read One
+    //Dog's details -- their walker
+
+//Create
+
+    //Dog
+    //City 
+    //WalkerCities
+
+//Update
+    //Dog -- walker
+
+
+//Delete
+    //Dog
+    //Walker
+    //WalkerCities
