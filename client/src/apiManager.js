@@ -4,5 +4,6 @@ export const getGreeting = async () => {
 }
 
 export const getDogs = async () => {
-  const res = await fetch
+  const res = await fetch("/api/dogs")
+  return res.json()
 }
