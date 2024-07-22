@@ -1,4 +1,6 @@
 using Deshawnapicsharp.Models;
+using Deshawnapicsharp.Models.DTOs;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -121,6 +123,16 @@ app.MapGet("/api/hello", () =>
 
 app.MapGet("/api/dogs", () =>
 {
+    return Results.Ok(
+        dogs.Select(d => new DogDTO()
+        {
+            Id = d.Id,
+            Name = d.Name,
+            CityDTOId = d.CityId,
+            WalkerDTOId = d.WalkerId
+        })
+        .ToList()
+    );
 
 });
 
