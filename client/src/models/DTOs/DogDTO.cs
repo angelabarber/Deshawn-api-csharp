@@ -6,9 +6,9 @@ public class DogDTO
 
     public string Name { get; set; }
 
-    public int CityDTOId { get; set ; }
+    public int CityId { get; set ; }
 
-    public int? WalkerDTOId { get; set; }
+    public int? WalkerId { get; set; }
 
-   // public Walker Walker {get; set;}
+   public WalkerDTO Walker {get; set;}
 }

@@ -1,6 +1,6 @@
 using Deshawnapicsharp.Models;
 using Deshawnapicsharp.Models.DTOs;
-using Microsoft.AspNetCore.Http.HttpResults;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -116,6 +116,55 @@ List<Dog> dogs = new List<Dog> ()
 
 };
 
+List<Walker> walkers = new List<Walker>()
+{
+    new Walker()
+    {
+        Id = 1,
+        Name = "Greg"
+    },
+    new Walker()
+    {
+        Id = 2,
+        Name = "Angela"
+    },
+    new Walker()
+    {
+        Id = 3,
+        Name = "Tabor"
+    },
+    new Walker()
+    {
+        Id = 4,
+        Name = "Andy"
+    },
+    new Walker()
+    {
+        Id = 5,
+        Name = "Heidel"
+    },
+    new Walker()
+    {
+        Id = 6,
+        Name = "Wilbo"
+    },
+    new Walker()
+    {
+        Id = 7,
+        Name = "Monkey"
+    },
+    new Walker()
+    {
+        Id = 8,
+        Name = "Buddy"
+    },
+    new Walker()
+    {
+        Id = 9,
+        Name = "Monica"
+    }
+};
+
 app.MapGet("/api/hello", () =>
 {
     return new { Message = "Welcome to DeShawn's Dog Walking" };
@@ -128,12 +177,38 @@ app.MapGet("/api/dogs", () =>
         {
             Id = d.Id,
             Name = d.Name,
-            CityDTOId = d.CityId,
-            WalkerDTOId = d.WalkerId
+            CityId = d.CityId,
+            WalkerId = d.WalkerId
         })
         .ToList()
     );
 
+});
+
+
+app.MapGet("/api/dogs/{id}", (int id) =>
+{
+       Dog dog =  dogs.FirstOrDefault( d => d.Id == id);
+    //    Walker walker = walkers.FirstOrDefault(w => w.Id == dog.WalkerId);
+
+       return Results.Ok(
+        new DogDTO()
+       {
+            Id = dog.Id,
+            Name = dog.Name,
+            CityId = dog.CityId,
+            WalkerId = dog.WalkerId,
+            Walker = walkers
+            .Where(w => w.Id == dog.WalkerId)
+            .Select(w => new WalkerDTO()
+            {
+                Id = w.Id,
+                Name = w.Name
+            })
+            .FirstOrDefault()
+       }
+
+    );
 });
 
 

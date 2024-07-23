@@ -10,5 +10,5 @@ public class Dog
 
     public int? WalkerId { get; set; }
 
-   // public Walker Walker {get; set;}
+
 }
