@@ -11,4 +11,6 @@ public class DogDTO
     public int? WalkerId { get; set; }
 
    public WalkerDTO Walker {get; set;}
+
+   public CityDTO City { get; set;}
 }

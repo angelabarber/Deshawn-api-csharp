@@ -165,6 +165,55 @@ List<Walker> walkers = new List<Walker>()
     }
 };
 
+List<City> cities = new List<City>()
+{
+    new City()
+    {
+        Id = 1,
+        Name = "San Diego"
+    },
+    new City()
+    {
+        Id = 2,
+        Name = "Chicago"
+    },
+    new City()
+    {
+        Id = 3,
+        Name = "White Plains"
+    },
+    new City()
+    {
+        Id = 4,
+        Name = "Pittsburgh"
+    },
+    new City()
+    {
+        Id = 5,
+        Name = "Phoenix"
+    },
+    new City()
+    {
+        Id = 6,
+        Name = "Minneapolis"
+    },
+    new City()
+    {
+        Id = 7,
+        Name = "Tucson"
+    },
+    new City()
+    {
+        Id = 8,
+        Name = "Denver"
+    },
+    new City()
+    {
+        Id = 9,
+        Name = "Sarasota"
+    }
+};
+
 app.MapGet("/api/hello", () =>
 {
     return new { Message = "Welcome to DeShawn's Dog Walking" };
@@ -191,6 +240,11 @@ app.MapGet("/api/dogs/{id}", (int id) =>
        Dog dog =  dogs.FirstOrDefault( d => d.Id == id);
     //    Walker walker = walkers.FirstOrDefault(w => w.Id == dog.WalkerId);
 
+        if(dog == null)
+        {
+            return Results.NotFound();
+        }
+
        return Results.Ok(
         new DogDTO()
        {
@@ -205,7 +259,15 @@ app.MapGet("/api/dogs/{id}", (int id) =>
                 Id = w.Id,
                 Name = w.Name
             })
-            .FirstOrDefault()
+            .FirstOrDefault(),
+            City = cities
+            .Where(c => c.Id == dog.CityId)
+            .Select(c => new CityDTO()
+            {
+                Id = c.Id,
+                Name = c.Name
+            }).FirstOrDefault()
+            
        }
 
     );
