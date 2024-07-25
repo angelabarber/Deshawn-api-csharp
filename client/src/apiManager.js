@@ -9,6 +9,6 @@ export const getDogs = async () => {
 }
 
 export const getDog = async (id) => {
-  const res = await fetch(`api/dogs/${id}`)
+  const res = await fetch(`/api/dogs/${id}`)
   return res.json()
 }
