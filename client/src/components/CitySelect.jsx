@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getCities } from "../apiManager.js"
 
-export const CitySelect = () => {
+export const CitySelect = ({ handleChange }) => {
   const [cities, setCities] = useState([])
 
   useEffect(() => {
@@ -15,7 +15,11 @@ export const CitySelect = () => {
 
   return (
     <>
-      <select className="cityInput">
+      <select
+        className="cityInput"
+        name="cityId"
+        onChange={(e) => handleChange(e)}
+      >
         <option> Select a City</option>
         {cities.map((c, i) => {
           return (

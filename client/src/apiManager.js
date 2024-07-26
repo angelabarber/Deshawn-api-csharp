@@ -14,7 +14,7 @@ export const getDog = async (id) => {
 }
 
 export const createDog = async (dog) => {
-  const res = await (`api/dogs`,
+  const res = await (`/api/dogs`,
   {
     method: "POST",
     headers: {
@@ -26,6 +26,6 @@ export const createDog = async (dog) => {
 }
 
 export const getCities = async () => {
-  const res = await fetch(`api/cities`)
+  const res = await fetch(`/api/cities`)
   return res.json()
 }
