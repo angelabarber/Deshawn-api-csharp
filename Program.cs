@@ -308,5 +308,17 @@ app.MapPost("/api/dogs", (Dog dog) =>
 
 });
 
+app.MapGet("/api/cities", () =>
+{
+     return Results.Ok(
+        cities.Select(c => new CityDTO()
+        {
+            Id = c.Id,
+            Name = c.Name,
+        })
+        .ToList()
+     );
+} );
+
 
 app.Run();
