@@ -320,5 +320,18 @@ app.MapGet("/api/cities", () =>
      );
 } );
 
+app.MapGet("/api/walkers", () =>
+{
+     return Results.Ok(
+        walkers.Select(w => new WalkerDTO()
+        {
+            Id = w.Id,
+            Name = w.Name,
+        })
+        .ToList()
+     );
+} );
+
+
 
 app.Run();
