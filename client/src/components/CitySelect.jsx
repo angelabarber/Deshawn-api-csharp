@@ -17,6 +17,7 @@ export const CitySelect = ({ handleChange }) => {
     <>
       <select
         className="cityInput"
+        id="cityId"
         name="cityId"
         onChange={(e) => handleChange(e)}
       >

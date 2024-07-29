@@ -14,8 +14,7 @@ export const getDog = async (id) => {
 }
 
 export const createDog = async (dog) => {
-  const res = await (`/api/dogs`,
-  {
+  const res = await fetch(`/api/dogs`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

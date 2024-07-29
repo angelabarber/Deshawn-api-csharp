@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { CitySelect } from "./CitySelect.jsx"
+import { useNavigate } from "react-router-dom"
+import { createDog } from "../apiManager.js"
 
 export const DogForm = () => {
   const [dog, updateDog] = useState({
@@ -7,6 +9,8 @@ export const DogForm = () => {
     walkerId: 0,
     cityId: 0,
   })
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const name = e.target.name
@@ -22,8 +26,17 @@ export const DogForm = () => {
     //   updateDog(copy)
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    await createDog(dog)
+    navigate("/")
+    //  .then(() => {
+    //   navigate("/")
+    // })
+  }
+
   return (
-    <form className=" dogForm">
+    <form onSubmit={handleSubmit} className=" dogForm">
       <h2 className="dogForm--title"> New Dog</h2>
       <fieldset>
         <div className="form-group">
@@ -31,6 +44,7 @@ export const DogForm = () => {
           <input
             required
             autoFocus
+            id="name"
             type="text"
             className="form-control"
             placeholder="Dog's Name"
@@ -46,7 +60,9 @@ export const DogForm = () => {
           <CitySelect required handleChange={handleChange} />
         </div>
       </fieldset>
-      <button className="btn btn-primary">Submit Dog</button>
+      <button type="submit" className="btn btn-primary">
+        Submit Dog
+      </button>
     </form>
   )
 }
