@@ -6,5 +6,7 @@ public class WalkerDTO
 
     public string Name {get; set;}
 
+    public List<CityDTO> Cities { get; set; }
+
     
 }

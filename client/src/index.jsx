@@ -15,10 +15,10 @@ root.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
+        <Route path="/dogs/:dogId" element={<DogDetails />} />
+        <Route path="/dogs/create" element={<DogForm />} />
+        <Route path="/walkers" element={<WalkerList />} />
       </Route>
-      <Route path="/dogs/:dogId" element={<DogDetails />} />
-      <Route path="/dogs/create" element={<DogForm />} />
-      <Route path="/walkers" element={<WalkerList />} />
     </Routes>
   </BrowserRouter>
 )

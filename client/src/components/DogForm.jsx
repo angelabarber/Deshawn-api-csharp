@@ -30,9 +30,6 @@ export const DogForm = () => {
     e.preventDefault()
     await createDog(dog)
     navigate("/")
-    //  .then(() => {
-    //   navigate("/")
-    // })
   }
 
   return (
