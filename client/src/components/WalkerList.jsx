@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react"
-import { getWalkers } from "../apiManager.js"
+import { getWalkerCities, getWalkers } from "../apiManager.js"
 import { CitySelect } from "./CitySelect.jsx"
 
 export const WalkerList = () => {
   const [walkers, setWalkers] = useState([])
+  const [walkerCities, setWalkerCities] = useState([])
   const [selectedCityId, setSelectedCityId] = useState(0)
 
   useEffect(() => {
-    getAllWalkers()
+    getAllWalkers().then(setWalkers)
   }, [])
 
-  const getAllWalkers = async () => {
-    getWalkers().then(setWalkers)
-  }
+  useEffect(() => {
+    getWalkerCities().then(setWalkerCities)
+  }, [selectedCityId])
 
   const handleChange = (e) => {
     setSelectedCityId(e.target.value)
@@ -29,12 +30,12 @@ export const WalkerList = () => {
               </div>
             )
           })
-        : walkers
-            .filter((w) => w.cityId == parseInt(selectedCityId))
-            .map((w, i) => {
+        : walkerCities
+            .filter((wc) => wc.cityId == parseInt(selectedCityId))
+            .map((wc, i) => {
               return (
                 <div key={i} className="walker">
-                  {w.name}
+                  {wc.walker.name}
                 </div>
               )
             })}

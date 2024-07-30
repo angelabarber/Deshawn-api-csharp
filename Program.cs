@@ -214,6 +214,34 @@ List<City> cities = new List<City>()
     }
 };
 
+List<WalkerCity> walker_cities = new List<WalkerCity>()
+{
+    new WalkerCity()
+    {
+        Id = 1,
+        WalkerId = 1,
+        CityId = 1
+    },
+    new WalkerCity()
+        {
+        Id = 2,
+        WalkerId = 1,
+        CityId = 2
+    },
+    new WalkerCity()
+        {
+        Id = 3,
+        WalkerId = 3,
+        CityId = 5
+    },
+    new WalkerCity()
+        {
+        Id = 4,
+        WalkerId = 9,
+        CityId = 7
+    },
+};
+
 app.MapGet("/api/hello", () =>
 {
     return new { Message = "Welcome to DeShawn's Dog Walking" };
@@ -331,6 +359,28 @@ app.MapGet("/api/walkers", () =>
         .ToList()
      );
 } );
+
+app.MapGet("/api/walkerCities", () => {
+
+{
+    return Results.Ok(
+        walker_cities.Select(wc => new WalkerCityDTO()
+        {
+            Id = wc.Id,
+            WalkerId = wc.WalkerId,
+            CityId = wc.CityId,
+            Walker = walkers.Where(w => w.Id == wc.WalkerId)
+            .Select(w=> new WalkerDTO()
+            {
+                Id = w.Id,
+                Name = w.Name
+            }).FirstOrDefault()
+
+        })
+        .ToList()
+    );
+}
+});
 
 
 
