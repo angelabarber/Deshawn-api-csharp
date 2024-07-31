@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 import { getWalkerCities, getWalkers } from "../apiManager.js"
 import { CitySelect } from "./CitySelect.jsx"
+import { DogSelectModal } from "./DogSelectModal.jsx"
 
 export const WalkerList = () => {
   const [walkers, setWalkers] = useState([])
   const [walkerCities, setWalkerCities] = useState([])
   const [selectedCityId, setSelectedCityId] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
-    getAllWalkers().then(setWalkers)
+    getWalkers().then(setWalkers)
   }, [])
 
   useEffect(() => {
@@ -19,6 +21,16 @@ export const WalkerList = () => {
     setSelectedCityId(e.target.value)
   }
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+
+  const handleDogUpdate = () => {}
+
   return (
     <>
       <CitySelect handleChange={handleChange} />
@@ -27,6 +39,15 @@ export const WalkerList = () => {
             return (
               <div key={i} className="walker">
                 {w.name}
+                <button className="btn__addDog" onClick={handleOpenModal}>
+                  {" "}
+                  Add Dog
+                </button>
+                <DogSelectModal
+                  isOpen={isModalOpen}
+                  onClose={handleCloseModal}
+                  onDogUpdate={handleDogUpdate}
+                />
               </div>
             )
           })
@@ -36,6 +57,15 @@ export const WalkerList = () => {
               return (
                 <div key={i} className="walker">
                   {wc.walker.name}
+                  <button className="btn__addDog" onClick={handleOpenModal}>
+                    {" "}
+                    Add Dog
+                  </button>
+                  <DogSelectModal
+                    isOpen={isModalOpen}
+                    onClose={handleCloseModal}
+                    onDogUpdate={handleDogUpdate}
+                  />
                 </div>
               )
             })}
