@@ -20,7 +20,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-List<Dog> dogs = new List<Dog> ()
+List<Dog> dogs = new List<Dog>()
 {
     new Dog()
     {
@@ -34,7 +34,7 @@ List<Dog> dogs = new List<Dog> ()
         Id = 2,
         Name = "Christoph Fosdyke",
         CityId = 1,
-        WalkerId = 11
+        WalkerId = 1
     },
     new Dog()
     {
@@ -112,8 +112,21 @@ List<Dog> dogs = new List<Dog> ()
         Name = "Diamond",
         CityId = 4,
         WalkerId = null
+    },
+    new Dog()
+    {
+        Id = 14,
+        Name = "Snowball",
+        CityId = 2,
+        WalkerId = null
+    },
+    new Dog()
+    {
+        Id = 15,
+        Name = "Bella",
+        CityId = 5,
+        WalkerId = 8
     }
-
 };
 
 List<Walker> walkers = new List<Walker>()
@@ -223,23 +236,47 @@ List<WalkerCity> walker_cities = new List<WalkerCity>()
         CityId = 1
     },
     new WalkerCity()
-        {
+    {
         Id = 2,
         WalkerId = 1,
         CityId = 2
     },
     new WalkerCity()
-        {
+    {
         Id = 3,
         WalkerId = 3,
         CityId = 5
     },
     new WalkerCity()
-        {
+    {
         Id = 4,
         WalkerId = 9,
         CityId = 7
     },
+    new WalkerCity()
+    {
+        Id = 5,
+        WalkerId = 2,
+        CityId = 6
+    },
+    new WalkerCity()
+    {
+        Id = 6,
+        WalkerId = 5,
+        CityId = 7
+    },
+    new WalkerCity()
+    {
+        Id = 7,
+        WalkerId = 8,
+        CityId = 5
+    },
+    new WalkerCity()
+    {
+        Id = 8,
+        WalkerId = 7,
+        CityId = 3
+    }
 };
 
 app.MapGet("/api/hello", () =>

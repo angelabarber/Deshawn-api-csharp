@@ -37,3 +37,8 @@ export const getWalkerCities = async () => {
   const res = await fetch(`/api/walkerCities`)
   return res.json()
 }
+
+export const getWalkerCitiesByWalker = async (id) => {
+  const res = await fetch(`/api/walkerCities/${id}`)
+  return res.json()
+}

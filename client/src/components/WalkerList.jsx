@@ -8,6 +8,7 @@ export const WalkerList = () => {
   const [walkerCities, setWalkerCities] = useState([])
   const [selectedCityId, setSelectedCityId] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [walkerId, setWalkerId] = useState(0)
 
   useEffect(() => {
     getWalkers().then(setWalkers)
@@ -21,15 +22,19 @@ export const WalkerList = () => {
     setSelectedCityId(e.target.value)
   }
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (e) => {
+    setWalkerId(e.target.value)
     setIsModalOpen(true)
   }
 
   const handleCloseModal = () => {
+    setWalkerId(0)
     setIsModalOpen(false)
   }
 
-  const handleDogUpdate = () => {}
+  const handleDogUpdate = () => {
+    console.log("handleDogUpdate fired...")
+  }
 
   return (
     <>
@@ -39,15 +44,13 @@ export const WalkerList = () => {
             return (
               <div key={i} className="walker">
                 {w.name}
-                <button className="btn__addDog" onClick={handleOpenModal}>
-                  {" "}
+                <button
+                  value={w.id}
+                  className="btn__addDog"
+                  onClick={handleOpenModal}
+                >
                   Add Dog
                 </button>
-                <DogSelectModal
-                  isOpen={isModalOpen}
-                  onClose={handleCloseModal}
-                  onDogUpdate={handleDogUpdate}
-                />
               </div>
             )
           })
@@ -57,18 +60,22 @@ export const WalkerList = () => {
               return (
                 <div key={i} className="walker">
                   {wc.walker.name}
-                  <button className="btn__addDog" onClick={handleOpenModal}>
-                    {" "}
+                  <button
+                    value={w.id}
+                    className="btn__addDog"
+                    onClick={handleOpenModal}
+                  >
                     Add Dog
                   </button>
-                  <DogSelectModal
-                    isOpen={isModalOpen}
-                    onClose={handleCloseModal}
-                    onDogUpdate={handleDogUpdate}
-                  />
                 </div>
               )
             })}
+      <DogSelectModal
+        walkerId={walkerId}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onDogUpdate={handleDogUpdate}
+      />
     </>
   )
 }
