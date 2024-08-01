@@ -402,12 +402,22 @@ app.MapPost("/api/dogs", (Dog dog) =>
 
 });
 
-app.MapPost("/api/dogs/{id}", (int id, Dog dog) => 
+app.MapPut("/api/dogs/{id}", (int id, Dog dog) => 
 {
-    Dog dogToUpdate = dogs.Where(d => d.Id == id).FirstOrDefault();
-    dogToUpdate = dog;
+    Dog dogToUpdate = dogs.FirstOrDefault(d => d.Id == id);
+    int dogIndex = dogs.IndexOf(dogToUpdate);
+    if (dogToUpdate == null)
+    {
+        return Results.NotFound();
+    }
 
-    return Results.NoContent();
+    if (id != dogToUpdate.Id)
+    {
+        return Results.BadRequest();
+    }
+    
+    dogs[dogIndex] = dog;
+    return Results.Ok(dogs[dogIndex]);
 });
 
 app.MapGet("/api/cities", () =>

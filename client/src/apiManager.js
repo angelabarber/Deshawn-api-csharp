@@ -26,12 +26,13 @@ export const createDog = async (dog) => {
 
 export const updateDog = async (id, dog) => {
   const res = await fetch(`/api/dogs/${id}`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(dog),
   })
+  return res.json()
 }
 
 export const getCities = async () => {

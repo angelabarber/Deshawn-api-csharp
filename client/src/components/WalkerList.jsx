@@ -43,13 +43,16 @@ export const WalkerList = () => {
   const handleDogUpdate = (e) => {
     console.log("handleDogUpdate fired...")
     const id = e.target.value
-    const dog = getAssignedDog(id)
-    updateDog(id, dog)
-    navigate(`/dogs/${id.target.value}`)
+    getAssignedDog(id)
   }
 
   const getAssignedDog = (id) => {
-    getDog(id).then((dog) => dog)
+    getDog(id).then((dog) => {
+      dog.walkerId = walkerId
+      updateDog(id, dog).then(() => {
+        navigate(`/dogs/${id}`)
+      })
+    })
   }
 
   return (
