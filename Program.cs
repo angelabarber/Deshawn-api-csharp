@@ -402,6 +402,14 @@ app.MapPost("/api/dogs", (Dog dog) =>
 
 });
 
+app.MapPost("/api/dogs/{id}", (int id, Dog dog) => 
+{
+    Dog dogToUpdate = dogs.Where(d => d.Id == id).FirstOrDefault();
+    dogToUpdate = dog;
+
+    return Results.NoContent();
+});
+
 app.MapGet("/api/cities", () =>
 {
      return Results.Ok(

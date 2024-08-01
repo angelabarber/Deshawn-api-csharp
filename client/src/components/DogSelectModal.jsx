@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react"
 import "../styles/DogSelectModal.css"
-import {
-  getDogs,
-  getWalkerCities,
-  getWalkerCitiesByWalker,
-} from "../apiManager.js"
+import { getDogs, getWalkerCities } from "../apiManager.js"
 
-export const DogSelectModal = ({ walkerId, isOpen, onClose, children }) => {
+export const DogSelectModal = ({
+  walkerId,
+  isOpen,
+  onClose,
+  onDogUpdate,
+  children,
+}) => {
   const [visible, setVisible] = useState(isOpen)
   const [walkerCities, setWalkerCities] = useState([])
   const [availableDogs, setAvailableDogs] = useState([])
@@ -15,10 +17,6 @@ export const DogSelectModal = ({ walkerId, isOpen, onClose, children }) => {
   useEffect(() => {
     setVisible(isOpen)
   }, [isOpen])
-
-  //   useEffect(() => {
-  //     getWalkerCitiesByWalker(walkerId).then(setWalkerCities)
-  //   }, [walkerId])
 
   useEffect(() => {
     getDogs().then(setAvailableDogs)
@@ -63,7 +61,9 @@ export const DogSelectModal = ({ walkerId, isOpen, onClose, children }) => {
               filteredAvailableDogs.map((d, i) => (
                 <div key={i}>
                   <h3>{d.name}</h3>
-                  <button>Assign!</button>
+                  <button value={d.id} onClick={onDogUpdate}>
+                    Assign!
+                  </button>
                 </div>
               ))
             ) : (

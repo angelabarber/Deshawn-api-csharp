@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react"
-import { getWalkerCities, getWalkers } from "../apiManager.js"
+import {
+  getDog,
+  getWalkerCities,
+  getWalkers,
+  updateDog,
+} from "../apiManager.js"
 import { CitySelect } from "./CitySelect.jsx"
 import { DogSelectModal } from "./DogSelectModal.jsx"
+import { useNavigate } from "react-router-dom"
 
 export const WalkerList = () => {
   const [walkers, setWalkers] = useState([])
@@ -9,6 +15,8 @@ export const WalkerList = () => {
   const [selectedCityId, setSelectedCityId] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [walkerId, setWalkerId] = useState(0)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getWalkers().then(setWalkers)
@@ -32,8 +40,16 @@ export const WalkerList = () => {
     setIsModalOpen(false)
   }
 
-  const handleDogUpdate = () => {
+  const handleDogUpdate = (e) => {
     console.log("handleDogUpdate fired...")
+    const id = e.target.value
+    const dog = getAssignedDog(id)
+    updateDog(id, dog)
+    navigate(`/dogs/${id.target.value}`)
+  }
+
+  const getAssignedDog = (id) => {
+    getDog(id).then((dog) => dog)
   }
 
   return (
