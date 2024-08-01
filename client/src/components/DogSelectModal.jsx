@@ -34,11 +34,7 @@ export const DogSelectModal = ({ walkerId, isOpen, onClose, children }) => {
     )
     const filteredDogs = availableDogs.filter((d) => {
       for (const wc of filteredWalkerCities) {
-        if (
-          wc.cityId == d.cityId &&
-          wc.walkerId != d.walkerId &&
-          d.walkerId == null
-        ) {
+        if (wc.cityId == d.cityId && wc.walkerId != d.walkerId) {
           return d
         }
       }

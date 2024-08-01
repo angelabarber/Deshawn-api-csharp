@@ -61,7 +61,7 @@ export const WalkerList = () => {
                 <div key={i} className="walker">
                   {wc.walker.name}
                   <button
-                    value={w.id}
+                    value={wc.walker.id}
                     className="btn__addDog"
                     onClick={handleOpenModal}
                   >

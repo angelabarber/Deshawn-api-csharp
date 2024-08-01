@@ -34,77 +34,77 @@ List<Dog> dogs = new List<Dog>()
         Id = 2,
         Name = "Christoph Fosdyke",
         CityId = 1,
-        WalkerId = 1
+        WalkerId = null
     },
     new Dog()
     {
         Id = 3,
         Name = "Rocket",
         CityId = 3,
-        WalkerId = 7
+        WalkerId = null
     },
     new Dog()
     {
         Id = 4,
         Name = "Ebony",
         CityId = 4,
-        WalkerId = 3
+        WalkerId = null
     },
     new Dog()
     {
         Id = 5,
         Name = "Scotty",
-        CityId = 5,
-        WalkerId = 8
+        CityId = 1,
+        WalkerId = null
     },
     new Dog()
     {
         Id = 6,
         Name = "Mac",
-        CityId = 6,
-        WalkerId = 2
+        CityId = 2,
+        WalkerId = null
     },
     new Dog()
     {
         Id = 7,
         Name = "Oreo",
-        CityId = 7,
-        WalkerId = 5
+        CityId = 2,
+        WalkerId = null
     },
     new Dog()
     {
         Id = 8,
         Name = "Sassy",
-        CityId = 8,
-        WalkerId = 1
+        CityId = 3,
+        WalkerId = null
     },
     new Dog()
     {
         Id = 9,
         Name = "Salem",
-        CityId = 9,
-        WalkerId = 9
+        CityId = 4,
+        WalkerId = null
     },
     new Dog()
     {
         Id = 10,
         Name = "Panda",
         CityId = 1,
-        WalkerId = 7
+        WalkerId = null
     },
     new Dog()
     {
         Id = 11,
         Name = "Classy",
         CityId = 2,
-        WalkerId = 1
+        WalkerId = null
     },
     new Dog()
     {
         Id = 12,
         Name = "Witch",
         CityId = 3,
-        WalkerId = 9
+        WalkerId = null
     },
     new Dog()
     {
@@ -124,8 +124,8 @@ List<Dog> dogs = new List<Dog>()
     {
         Id = 15,
         Name = "Bella",
-        CityId = 5,
-        WalkerId = 8
+        CityId = 1,
+        WalkerId = null
     }
 };
 
@@ -183,47 +183,22 @@ List<City> cities = new List<City>()
     new City()
     {
         Id = 1,
-        Name = "San Diego"
+        Name = "Bellevue"
     },
     new City()
     {
         Id = 2,
-        Name = "Chicago"
+        Name = "Brentwood"
     },
     new City()
     {
         Id = 3,
-        Name = "White Plains"
+        Name = "Nashville"
     },
     new City()
     {
         Id = 4,
-        Name = "Pittsburgh"
-    },
-    new City()
-    {
-        Id = 5,
-        Name = "Phoenix"
-    },
-    new City()
-    {
-        Id = 6,
-        Name = "Minneapolis"
-    },
-    new City()
-    {
-        Id = 7,
-        Name = "Tucson"
-    },
-    new City()
-    {
-        Id = 8,
-        Name = "Denver"
-    },
-    new City()
-    {
-        Id = 9,
-        Name = "Sarasota"
+        Name = "Green Hills"
     }
 };
 
@@ -239,43 +214,97 @@ List<WalkerCity> walker_cities = new List<WalkerCity>()
     {
         Id = 2,
         WalkerId = 1,
-        CityId = 2
+        CityId = 3
     },
     new WalkerCity()
     {
         Id = 3,
-        WalkerId = 3,
-        CityId = 5
+        WalkerId = 2,
+        CityId = 2
     },
     new WalkerCity()
     {
         Id = 4,
-        WalkerId = 9,
-        CityId = 7
+        WalkerId = 2,
+        CityId = 4
     },
     new WalkerCity()
     {
         Id = 5,
-        WalkerId = 2,
-        CityId = 6
+        WalkerId = 3,
+        CityId = 3
     },
     new WalkerCity()
     {
         Id = 6,
-        WalkerId = 5,
-        CityId = 7
+        WalkerId = 3,
+        CityId = 4
     },
     new WalkerCity()
     {
         Id = 7,
-        WalkerId = 8,
-        CityId = 5
+        WalkerId = 4,
+        CityId = 1
     },
     new WalkerCity()
     {
         Id = 8,
+        WalkerId = 4,
+        CityId = 2
+    },
+    new WalkerCity()
+    {
+        Id = 9,
+        WalkerId = 5,
+        CityId = 2
+    },
+    new WalkerCity()
+    {
+        Id = 10,
+        WalkerId = 6,
+        CityId = 1
+    },
+    new WalkerCity()
+    {
+        Id = 11,
+        WalkerId = 6,
+        CityId = 3
+    },
+    new WalkerCity()
+    {
+        Id = 12,
         WalkerId = 7,
         CityId = 3
+    },
+    new WalkerCity()
+    {
+        Id = 13,
+        WalkerId = 7,
+        CityId = 4
+    },
+    new WalkerCity()
+    {
+        Id = 14,
+        WalkerId = 8,
+        CityId = 1
+    },
+    new WalkerCity()
+    {
+        Id = 15,
+        WalkerId = 8,
+        CityId = 2
+    },
+    new WalkerCity()
+    {
+        Id = 16,
+        WalkerId = 9,
+        CityId = 3
+    },
+    new WalkerCity()
+    {
+        Id = 17,
+        WalkerId = 9,
+        CityId = 4
     }
 };
 
