@@ -35,6 +35,15 @@ export const updateDog = async (id, dog) => {
   return res.json()
 }
 
+export const deleteDog = async (id) => {
+  const res = await fetch(`/api/dogs/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+}
+
 export const getCities = async () => {
   const res = await fetch(`/api/cities`)
   return res.json()

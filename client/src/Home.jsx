@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { getDogs, getGreeting } from "./apiManager"
+import { deleteDog, getDogs, getGreeting } from "./apiManager"
 import { useEffect, useState } from "react"
 
 export default function Home() {
@@ -25,6 +25,12 @@ export default function Home() {
     setDogs(await getDogs())
   }
 
+  const handleRemoveDog = (id) => {
+    deleteDog(id).then(() => {
+      getAllDogs()
+    })
+  }
+
   return (
     <section className="home">
       <p>{greeting.message}</p>
@@ -32,6 +38,7 @@ export default function Home() {
         return (
           <div key={i} className="dog">
             <Link to={`/dogs/${dog.id}`}>{dog.name}</Link>
+            <button onClick={() => handleRemoveDog(dog.id)}> Remove Dog</button>
           </div>
         )
       })}

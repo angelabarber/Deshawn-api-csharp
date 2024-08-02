@@ -420,6 +420,23 @@ app.MapPut("/api/dogs/{id}", (int id, Dog dog) =>
     return Results.Ok(dogs[dogIndex]);
 });
 
+app.MapDelete("/api/dogs/{id}", (int id) => {
+    Dog dog = dogs.FirstOrDefault(d => d.Id == id);
+
+    if (dog== null)
+    {
+        return Results.NotFound();
+    }
+
+    if (id != dog.Id)
+    {
+        return Results.BadRequest();
+    }
+    
+    dogs.Remove(dog);
+    return Results.NoContent();
+});
+
 app.MapGet("/api/cities", () =>
 {
      return Results.Ok(
