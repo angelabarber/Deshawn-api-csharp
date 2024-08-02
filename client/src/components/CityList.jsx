@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react"
-import { getCities } from "../apiManager.js"
+import { CreateCity, getCities } from "../apiManager.js"
 
 export const CityList = () => {
   const [cities, setCities] = useState([])
+  const [city, setCity] = useState({})
 
   useEffect(() => {
-    getCities.then(setCities)
+    getCities().then(setCities)
   }, [])
 
-  const handleNewCity = () => {}
+  const handleNewCity = () => {
+    CreateCity(city).then(() => {
+      getCities().then(setCities)
+      setCity({})
+    })
+  }
 
   return (
     <>
-      <input placeholder="City Name" />
+      <input
+        onChange={(e) => setCity({ name: e.target.value })}
+        placeholder="City Name"
+      />
       <button onClick={handleNewCity}>Add City</button>
       <section>
-        {cities.map((wc, i) => {
+        {cities.map((c, i) => {
           return (
             <div key={i} className="city">
               {c.name}

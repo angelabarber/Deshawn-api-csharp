@@ -432,6 +432,13 @@ app.MapGet("/api/cities", () =>
      );
 } );
 
+app.MapPost("/api/cities", (City city) =>
+{
+    city.Id = cities.Count > 0 ? cities.Max( c => c.Id) +1 : 1;
+    cities.Add(city);
+    return Results.Created();
+});
+
 app.MapGet("/api/walkers", () =>
 {
      return Results.Ok(
