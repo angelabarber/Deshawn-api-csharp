@@ -18,11 +18,13 @@ export const CityList = () => {
 
   return (
     <>
-      <input
-        onChange={(e) => setCity({ name: e.target.value })}
-        placeholder="City Name"
-      />
-      <button onClick={handleNewCity}>Add City</button>
+      <form onSubmit={handleNewCity}>
+        <input
+          onChange={(e) => setCity({ name: e.target.value })}
+          placeholder="City Name"
+        />
+        <button type="submit">Add City</button>
+      </form>
       <section>
         {cities.map((c, i) => {
           return (
