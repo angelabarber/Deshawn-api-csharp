@@ -6,7 +6,7 @@ export const DogSelectModal = ({
   walkerId,
   isOpen,
   onClose,
-  onDogUpdate,
+  onUpdate,
   children,
 }) => {
   const [visible, setVisible] = useState(isOpen)
@@ -61,7 +61,7 @@ export const DogSelectModal = ({
               filteredAvailableDogs.map((d, i) => (
                 <div key={i}>
                   <h3>{d.name}</h3>
-                  <button value={d.id} onClick={onDogUpdate}>
+                  <button value={d.id} onClick={onUpdate}>
                     Assign!
                   </button>
                 </div>

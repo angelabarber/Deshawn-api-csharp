@@ -7,13 +7,15 @@ import {
 } from "../apiManager.js"
 import { CitySelect } from "./CitySelect.jsx"
 import { DogSelectModal } from "./DogSelectModal.jsx"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { WalkerModal } from "./WalkerModal.jsx"
 
 export const WalkerList = () => {
   const [walkers, setWalkers] = useState([])
   const [walkerCities, setWalkerCities] = useState([])
   const [selectedCityId, setSelectedCityId] = useState(0)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [DogModalOpen, setDogModalOpen] = useState(false)
+  const [WalkerModalOpen, setWalkerModalOpen] = useState(false)
   const [walkerId, setWalkerId] = useState(0)
 
   const navigate = useNavigate()
@@ -30,9 +32,14 @@ export const WalkerList = () => {
     setSelectedCityId(e.target.value)
   }
 
-  const handleOpenModal = (e) => {
+  const handleDogModal = (e) => {
     setWalkerId(e.target.value)
-    setIsModalOpen(true)
+    setDogModalOpen(true)
+  }
+
+  const handleWalkerModal = (e) => {
+    setWalkerId(e.target.value)
+    setWalkerModalOpen(true)
   }
 
   const handleCloseModal = () => {
@@ -44,6 +51,12 @@ export const WalkerList = () => {
     console.log("handleDogUpdate fired...")
     const id = e.target.value
     getAssignedDog(id)
+  }
+
+  const handleWalkerUpdate = (e) => {
+    console.log("handleWalkerUpdate fired...")
+    // const id = e.target.value
+    // getAssignedDog(id)
   }
 
   const getAssignedDog = (id) => {
@@ -62,11 +75,11 @@ export const WalkerList = () => {
         ? walkers.map((w, i) => {
             return (
               <div key={i} className="walker">
-                {w.name}
+                <Link onClick={handleWalkerModal}>{w.name}</Link>
                 <button
                   value={w.id}
                   className="btn__addDog"
-                  onClick={handleOpenModal}
+                  onClick={handleDogModal}
                 >
                   Add Dog
                 </button>
@@ -78,11 +91,11 @@ export const WalkerList = () => {
             .map((wc, i) => {
               return (
                 <div key={i} className="walker">
-                  {wc.walker.name}
+                  <Link onClick={handleWalkerModal}>{wc.walker.name}</Link>
                   <button
                     value={wc.walker.id}
                     className="btn__addDog"
-                    onClick={handleOpenModal}
+                    onClick={handleDogModal}
                   >
                     Add Dog
                   </button>
@@ -91,9 +104,15 @@ export const WalkerList = () => {
             })}
       <DogSelectModal
         walkerId={walkerId}
-        isOpen={isModalOpen}
+        isOpen={DogModalOpen}
         onClose={handleCloseModal}
-        onDogUpdate={handleDogUpdate}
+        onUpdate={handleDogUpdate}
+      />
+      <WalkerModal
+        walkerId={walkerId}
+        isOpen={handleWalkerModal}
+        onClose={handleCloseModal}
+        onUpdate={handleWalkerUpdate}
       />
     </>
   )
