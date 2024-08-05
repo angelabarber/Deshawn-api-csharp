@@ -9,4 +9,6 @@ public class WalkerCityDTO
     public int CityId { get; set;}
 
     public WalkerDTO Walker { get; set; }
+
+    public CityDTO City { get; set; }
 }

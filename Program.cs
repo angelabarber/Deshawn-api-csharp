@@ -1,5 +1,7 @@
+using System.Net.Http.Headers;
 using Deshawnapicsharp.Models;
 using Deshawnapicsharp.Models.DTOs;
+using Microsoft.AspNetCore.HttpLogging;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -467,6 +469,36 @@ app.MapGet("/api/walkers", () =>
         .ToList()
      );
 } );
+
+app.MapGet("/api/walkers/{id}" , (int id) => {
+    return Results.Ok(
+        walkers
+        .Where( w => w.Id == id)
+        .Select(w => new WalkerDTO ()
+        {
+            Id = w.Id,
+            Name = w.Name,
+            Cities = walker_cities
+            .Where(wc => wc.WalkerId == id)
+            .Select(wc => new WalkerCityDTO()
+            {
+                Id = wc.Id,
+                WalkerId = wc.WalkerId,
+                CityId = wc.CityId ,
+                Walker = null,
+                City = cities
+                .Where(c => c.Id == wc.CityId)
+                .Select(c => new CityDTO()
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .FirstOrDefault()
+            }).ToList()
+        })
+        .FirstOrDefault()
+    );
+});
 
 app.MapGet("/api/walkerCities", () => {
 
