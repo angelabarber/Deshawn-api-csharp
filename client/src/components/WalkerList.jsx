@@ -38,13 +38,15 @@ export const WalkerList = () => {
   }
 
   const handleWalkerModal = (e) => {
-    setWalkerId(e.target.value)
+    e.preventDefault()
+    setWalkerId(e.target.name)
     setWalkerModalOpen(true)
   }
 
   const handleCloseModal = () => {
     setWalkerId(0)
-    setIsModalOpen(false)
+    setWalkerModalOpen(false)
+    setDogModalOpen(false)
   }
 
   const handleDogUpdate = (e) => {
@@ -75,7 +77,9 @@ export const WalkerList = () => {
         ? walkers.map((w, i) => {
             return (
               <div key={i} className="walker">
-                <Link onClick={handleWalkerModal}>{w.name}</Link>
+                <Link name={w.id} onClick={(e) => handleWalkerModal(e)}>
+                  {w.name}
+                </Link>
                 <button
                   value={w.id}
                   className="btn__addDog"
@@ -91,7 +95,12 @@ export const WalkerList = () => {
             .map((wc, i) => {
               return (
                 <div key={i} className="walker">
-                  <Link onClick={handleWalkerModal}>{wc.walker.name}</Link>
+                  <Link
+                    name={wc.walker.id}
+                    onClick={(e) => handleWalkerModal(e)}
+                  >
+                    {wc.walker.name}
+                  </Link>
                   <button
                     value={wc.walker.id}
                     className="btn__addDog"
@@ -110,7 +119,7 @@ export const WalkerList = () => {
       />
       <WalkerModal
         walkerId={walkerId}
-        isOpen={handleWalkerModal}
+        isOpen={WalkerModalOpen}
         onClose={handleCloseModal}
         onUpdate={handleWalkerUpdate}
       />

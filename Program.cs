@@ -471,6 +471,10 @@ app.MapGet("/api/walkers", () =>
 } );
 
 app.MapGet("/api/walkers/{id}" , (int id) => {
+    // if(!id)
+    // {
+    //     return Results.BadRequest();
+    // }
     return Results.Ok(
         walkers
         .Where( w => w.Id == id)

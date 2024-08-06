@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "../styles/DogSelectModal.css"
-import { getWalker, getWalkerCities } from "../apiManager.js"
+import { getCities, getWalker } from "../apiManager.js"
 
 export const WalkerModal = ({
   walkerId,
@@ -10,6 +10,7 @@ export const WalkerModal = ({
   children,
 }) => {
   const [walker, setWalker] = useState({})
+  const [cities, setCities] = useState([])
   const [visible, setVisible] = useState(isOpen)
 
   useEffect(() => {
@@ -17,7 +18,13 @@ export const WalkerModal = ({
   }, [isOpen])
 
   useEffect(() => {
-    getWalker(walkerId).then(setWalker)
+    if (walkerId) {
+      getWalker(walkerId).then(setWalker)
+    }
+  }, [walkerId])
+
+  useEffect(() => {
+    getCities().then(setCities)
   }, [])
 
   const handleClose = () => {
@@ -30,13 +37,51 @@ export const WalkerModal = ({
       className={`modal-overlay ${visible ? "visible" : ""}`}
       onClick={handleClose}
     >
-      {visible && (
+      {visible && walker && (
         <div className="modal-content">
           <div className="modal-header">
             <h2>Edit walker</h2>
           </div>
           <div className="modal-body">
-            {<h4>Walker modal body</h4>}
+            <form onSubmit={onUpdate}>
+              <div className="form-group">
+                <label htmlFor="walkerName">Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="walkerName"
+                  value={walker.name}
+                  onChange={(e) =>
+                    setWalker({ ...walker, name: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Select Cities:</label>
+                {cities.map((city, i) => (
+                  <div key={i} className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id={`city-${city.id}`}
+                      checked={walker.cities?.some((c) => c.cityId === city.id)}
+                      onChange={(e) => handleCityChange(e, city.id)}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`city-${city.id}`}
+                    >
+                      {city.name}
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+              <button type="submit" className="btn btn-primary">
+                Save
+              </button>
+            </form>
             <button onClick={handleClose}>Close</button>
           </div>
           {children}
