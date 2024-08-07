@@ -73,6 +73,18 @@ export const WalkerList = () => {
   return (
     <>
       <CitySelect handleChange={handleChange} />
+      <DogSelectModal
+        walkerId={walkerId}
+        isOpen={DogModalOpen}
+        onClose={handleCloseModal}
+        onUpdate={handleDogUpdate}
+      />
+      <WalkerModal
+        walkerId={walkerId}
+        isOpen={WalkerModalOpen}
+        onClose={handleCloseModal}
+        onUpdate={handleWalkerUpdate}
+      />
       {selectedCityId == 0
         ? walkers.map((w, i) => {
             return (
@@ -111,18 +123,6 @@ export const WalkerList = () => {
                 </div>
               )
             })}
-      <DogSelectModal
-        walkerId={walkerId}
-        isOpen={DogModalOpen}
-        onClose={handleCloseModal}
-        onUpdate={handleDogUpdate}
-      />
-      <WalkerModal
-        walkerId={walkerId}
-        isOpen={WalkerModalOpen}
-        onClose={handleCloseModal}
-        onUpdate={handleWalkerUpdate}
-      />
     </>
   )
 }
